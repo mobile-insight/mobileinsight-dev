@@ -44,7 +44,6 @@ SCRIPT
 $INSTALL_CORE = <<SCRIPT
 # Install MobileInsight-core and run example
 cd /home/vagrant/mi-dev/mobileinsight-core
-git checkout dev-2.2.0
 sudo ./install-ubuntu.sh
 
 SCRIPT
@@ -93,7 +92,6 @@ sudo python setup.py install
 
 # Prepare MobileInsight Android app compilation
 cd /home/vagrant/mi-dev/mobileinsight-mobile
-git checkout dev-2.2.0
 
 # Make MobileInsight compilation config
 make config
