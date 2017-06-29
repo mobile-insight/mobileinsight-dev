@@ -4,7 +4,7 @@ Automated Deployment for MobileInsight Development Environment
 
 ## Introduction
 
-This repo contains a `Vagrantfile` for automated deployment for [MobileInsight](http://mobileinsight.net) development. It configures a Ubuntu 16.04 virtual machine contains MobileInsight repos using Vagrant and VirtualBox. It installs `mobileinsight-core`, `mobileinsight-mobile` and `python-for-android` on the VM, so that you can login and perform offline analysis of cellular traces, and compile the mobile version of MobileInsight.
+This repo contains a `Vagrantfile` for automated deployment for [MobileInsight](http://www.mobileinsight.net) development. It configures a Ubuntu 16.04 virtual machine contains MobileInsight repos using Vagrant and VirtualBox. It installs `mobileinsight-core`, `mobileinsight-mobile` and `python-for-android` on the VM, so that you can login and perform offline analysis of cellular traces, and compile the mobile version of MobileInsight.
 
 ## Quickstart
 
@@ -23,6 +23,53 @@ When the process finish install and returns the shell, a MobileInsight app is al
 
 	adb install MobileInsight-3.0.0-debug.apk
 
+You can stop the virtual machine using either command:
+
+	vagrant suspend (suspends the machine)
+	vagrant halt (stops the vagrant machine)
+
+## Customize MobileInsight
+
+To log into the virtual machine, use the following command
+
+	vagrant up (if the VM has been stopped)
+	vagrant ssh
+
+All MobileInsight related repos are under `/home/vagrant/mi-dev` folder, which you can access by
+
+	cd mi-dev
+
+The `/vagrant` folder in VM is a special folder. It is the synced folder between the VM and your host machine, see more details [here](https://www.vagrantup.com/docs/synced-folders/).
+
+### Modify mobileinsight-core codes
+
+When you modify the [`mobileinsight-core`](https://github.com/mobile-insight/mobileinsight-core) codes, you can locally debug it without commiting to GitHub.
+
+First, apply the local debug patch to `python-for-android` and reinstall:
+
+	cd ~/mi-dev
+	patch -p1 < p4a.patch
+	cd python-for-android
+	sudo python setup.py install
+
+Next, modify `mobileinsight-core` codes as needed, and then reinstall:
+
+	cd ~/mi-dev/mobileinsight-core
+	./install-ubuntu.sh
+
+### Modify mobileinsight-mobile codes
+
+If you wish to add your own plugin and compile it into the MobileInsight apk, you may put your plugin folder under the `mobileinsight-mobile/app/plugins/` folder.
+For details on how to write the plugin, please refer to the [tutorial](http://www.mobileinsight.net/tutorial-plugin.html) on the MobileInsight website.
+
+To compile a new apk, run make command again:
+
+	make apk_debug
+
+If you wish to incorporate the changes from the `mobileinsight-core` codes as well, you need to clean and recompile the distribution first:
+
+	make clean_dist
+	make dist
 
 ## How to Contribute
 
@@ -31,5 +78,6 @@ We love pull requests and discussing novel ideas. You can open issues here to re
 The following Slack group is used exclusively for discussions about developing the MobileInsight and its sister projects:
 
 + Dev Slack Group: https://mobileinsight-dev.slack.com
++ Email: mobileinsight.team@gmail.com
 
-For other advanced topics, please refer to the wiki and the [MobileInsight website](http://mobileinsight.net).
+For other advanced topics, please refer to the wiki and the [MobileInsight website](http://www.mobileinsight.net).

@@ -1,0 +1,13 @@
+diff --git a/python-for-android/pythonforandroid/recipes/mobileinsight/__init__.py b/python-for-android/pythonforandroid/recipes/mobileinsight/__init__.py
+index 317cbba..5cd960a 100644
+--- a/python-for-android/pythonforandroid/recipes/mobileinsight/__init__.py
++++ b/python-for-android/pythonforandroid/recipes/mobileinsight/__init__.py
+@@ -7,7 +7,7 @@ from os.path import exists, join, isdir, split
+ import sh
+ import glob
+ 
+-LOCAL_DEBUG = False
++LOCAL_DEBUG = True
+ 
+ class MobileInsightRecipe(Recipe):
+ 
