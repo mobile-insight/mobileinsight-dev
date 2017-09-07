@@ -110,7 +110,8 @@ cp MobileInsight-3.0.0-debug.apk /vagrant
 SCRIPT
 
 Vagrant.configure(2) do |config|
-  config.vm.box = "boxcutter/ubuntu1604"
+  config.vm.box = "bento/ubuntu-16.04"
+  config.vm.box_version = "201708.22.0"
 
   config.vm.provider "virtualbox" do |vb|
     # # Display the VirtualBox GUI when booting the machine
