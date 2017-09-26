@@ -18,8 +18,9 @@ apt-get -y install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.
 gem install android-sdk-installer
 
 easy_install pip
+pip install cython == 0.25
 pip install pyyaml xmltodict pyserial
-pip install virtualenv virtualenvwrapper cython
+pip install virtualenv virtualenvwrapper
 
 SCRIPT
 
