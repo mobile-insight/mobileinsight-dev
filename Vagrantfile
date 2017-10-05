@@ -4,7 +4,7 @@
 # MobileInsight Vagrant Installation Script
 # Copyright (c) 2017 MobileInsight Team
 # Author: Zengwen Yuan, zyuan (at) cs.ucla.edu
-# Version: 1.0
+# Version: 1.2
 
 $INSTALL_BASE = <<SCRIPT
 apt-get update
@@ -109,7 +109,7 @@ make apk_debug
 
 # Copy MobileInsight apk to local folder
 # Please exit vagrant ssh shell and use adb to install
-cp MobileInsight-3.0.0-debug.apk /vagrant
+cp MobileInsight-3.2.0-debug.apk /vagrant
 
 SCRIPT
 
