@@ -2,9 +2,9 @@
 # vi: set ft=ruby :
 
 # MobileInsight Vagrant Installation Script
-# Copyright (c) 2017 MobileInsight Team
+# Copyright (c) 2019 MobileInsight Team
 # Author: Zengwen Yuan, zyuan (at) cs.ucla.edu
-# Version: 1.2
+# Version: 1.3
 
 $INSTALL_BASE = <<SCRIPT
 apt-get update
@@ -109,13 +109,13 @@ make apk_debug
 
 # Copy MobileInsight apk to local folder
 # Please exit vagrant ssh shell and use adb to install
-cp MobileInsight-3.2.0-debug.apk /vagrant
+cp MobileInsight-4.0.0-debug.apk /vagrant
 
 SCRIPT
 
 Vagrant.configure(2) do |config|
-  config.vm.box = "bento/ubuntu-16.04"
-  config.vm.box_version = "201708.22.0"
+  config.vm.box = "ubuntu/xenial64"
+  # config.vm.box_version = "201708.22.0"
 
   config.vm.provider "virtualbox" do |vb|
     # # Display the VirtualBox GUI when booting the machine
