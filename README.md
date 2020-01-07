@@ -10,18 +10,15 @@ This repo contains a `Vagrantfile` for automated deployment for [MobileInsight](
 
 Download this repo and put it the `Vagrantfile` under your development path, say `/path/to/dev`. Run `vagrant up` and install the virtual image (depending on the network and CPU speed, the installation may take half hour or longer.). 
 
+	git clone https://github.com/mobile-insight/mobileinsight-dev.git /path/to/dev
 	cd /path/to/dev
-	wget https://github.com/mobile-insight/mobileinsight-dev/archive/v1.0.tar.gz
-	tar -xf v1.0.tar.gz mobileinsight-dev-1.0/Vagrantfile
-	mv mobileinsight-dev-1.0/Vagrantfile .
-	rm -r mobileinsight-dev-1.0
 	vagrant up
 
 It will run and compile a MobileInsight apk, and run an offline MobileInsight analysis example at the end (you should be able to see the decoded messages).
 
 When the process finish install and returns the shell, a MobileInsight app is already compiled and copied to your path (`/path/to/dev`). You can install it on supported Android phone and try it out immediately using `adb`.
 
-	adb install MobileInsight-3.0.0-debug.apk
+	adb install MobileInsight-4.0.0-debug.apk
 
 You can stop the virtual machine using either command:
 
