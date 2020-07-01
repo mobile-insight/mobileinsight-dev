@@ -2,9 +2,9 @@
 # vi: set ft=ruby :
 
 # MobileInsight Vagrant Installation Script
-# Copyright (c) 2017 MobileInsight Team
-# Author: Zengwen Yuan, zyuan (at) cs.ucla.edu
-# Version: 1.2
+# Copyright (c) 2020 MobileInsight Team
+# Author: Yuanjie Li, Zengwen Yuan
+# Version: 2.0
 
 $INSTALL_BASE = <<SCRIPT
 apt-get update
