@@ -18,7 +18,7 @@ It will run and compile a MobileInsight apk, and run an offline MobileInsight an
 
 When the process finish install and returns the shell, a MobileInsight app is already compiled and copied to your path (`/path/to/dev`). You can install it on supported Android phone and try it out immediately using `adb`.
 
-	adb install MobileInsight-4.0.0-debug.apk
+	adb install MobileInsight-5.0.0-debug.apk
 
 You can stop the virtual machine using either command:
 
@@ -74,7 +74,6 @@ We love pull requests and discussing novel ideas. You can open issues here to re
 
 The following Slack group is used exclusively for discussions about developing the MobileInsight and its sister projects:
 
-+ Dev Slack Group: https://mobileinsight-dev.slack.com (join via this [link](https://goo.gl/htJGqT))
 + Email: support@mobileinsight.net
 
 For other advanced topics, please refer to the wiki and the [MobileInsight website](http://www.mobileinsight.net).
