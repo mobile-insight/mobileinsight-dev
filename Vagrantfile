@@ -51,17 +51,16 @@ mkdir /home/vagrant/mi-dev
 cd /home/vagrant/mi-dev
 
 # Clone MobileInsight-core repo
-# git clone -b dev-py3 https://github.com/mobile-insight/mobileinsight-core.git
-git clone https://github.com/mobile-insight/mobileinsight-core.git
+# git clone https://github.com/mobile-insight/mobileinsight-core.git
+git clone -b dev-6.0 https://github.com/mobile-insight/mobileinsight-core.git
 
 # Clone MobileInsight-mobile repo
-# git clone -b dev-py3 https://github.com/mobile-insight/mobileinsight-mobile.git
-git clone https://github.com/mobile-insight/mobileinsight-mobile.git
+# git clone https://github.com/mobile-insight/mobileinsight-mobile.git
+git clone -b dev-6.0 https://github.com/mobile-insight/mobileinsight-mobile.git
 
 # Clone python-for-android repo
-git clone https://github.com/mobile-insight/python-for-android.git
-# git clone -b dev-mi5 https://github.com/mobile-insight/python-for-android.git
-# git clone -b p4a-MI https://github.com/luckiday/python-for-android.git
+# git clone https://github.com/mobile-insight/python-for-android.git
+git clone -b dev-6.0 https://github.com/mobile-insight/python-for-android.git
 
 SCRIPT
 
@@ -118,6 +117,9 @@ sudo python3 setup.py install
 # Prepare MobileInsight Android app compilation
 cd /home/vagrant/mi-dev/mobileinsight-mobile
 
+# To recompile after change the core
+# rm -rf ~./python-for-android
+
 # Make MobileInsight compilation config
 make config
 
@@ -145,8 +147,8 @@ Vagrant.configure(2) do |config|
     # vb.gui = true
 
     # Customize the amount of memory and cpus on the VM:
-    vb.memory = "2048"
-    vb.cpus = 2
+    vb.memory = "8192"
+    vb.cpus = 12
   end
 
   config.vm.provision "shell", privileged: true, inline: $INSTALL_BASE
