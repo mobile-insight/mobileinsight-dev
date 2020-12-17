@@ -83,16 +83,16 @@ wget  http://www.mobileinsight.net/wireshark-3.4.0-rbc-dissector.tar.xz -O wires
 tar -xf wireshark-3.4.0.tar.xz
 rm wireshark-3.4.0.tar.xz
 
+wget http://www.tcpdump.org/release/libpcap-1.9.1.tar.gz
+tar -xf libpcap-1.9.1.tar.gz
+rm libpcap-1.9.1.tar.gz
+
 # Apply the patch to wireshark
 cp /vagrant/ws_android.patch ~/
 cd ~/wireshark-3.4.0
 patch -p1 < ../ws_android.patch
 
-wget http://www.tcpdump.org/release/libpcap-1.9.1.tar.gz
-tar -xf libpcap-1.9.1.tar.gz
-rm libpcap-1.9.1.tar.gz
-
-# Compile first
+# Compile wireshark first time
 cd ~/wireshark-3.4.0/tools/lemon
 cmake .
 make
