@@ -1,2 +1,4 @@
 .vagrant/
+ws_bin/
+ws_lib/
 .DS_Store
