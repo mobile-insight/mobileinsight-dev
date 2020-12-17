@@ -79,9 +79,9 @@ tar -xf libffi-3.3.tar.gz
 rm libffi-3.3.tar.gz
 
 ws_ver=3.4.0
-wget  http://www.mobileinsight.net/wireshark-${ws_ver}-rbc-dissector.tar.xz -O wireshark-${ws_ver}.tar.xz
-tar -xf wireshark-${ws_ver}.tar.xz
-rm wireshark-${ws_ver}.tar.xz
+wget  http://www.mobileinsight.net/wireshark-3.4.0-rbc-dissector.tar.xz -O wireshark-3.4.0.tar.xz
+tar -xf wireshark-3.4.0.tar.xz
+rm wireshark-3.4.0.tar.xz
 
 # Apply the patch to wireshark
 cp /vagrant/ws_android.patch ~/
@@ -187,9 +187,9 @@ source ~/envsetup.sh
 sudo rm -rf wireshark-3.4.0/
 
 ws_ver=3.4.0
-wget  http://www.mobileinsight.net/wireshark-${ws_ver}-rbc-dissector.tar.xz -O wireshark-${ws_ver}.tar.xz
-tar -xf wireshark-${ws_ver}.tar.xz
-rm wireshark-${ws_ver}.tar.xz
+wget  http://www.mobileinsight.net/wireshark-3.4.0-rbc-dissector.tar.xz -O wireshark-3.4.0.tar.xz
+tar -xf wireshark-3.4.0.tar.xz
+rm wireshark-3.4.0.tar.xz
 
 # Apply the patch to wireshark
 cp /vagrant/ws_android.patch ~/
