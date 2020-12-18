@@ -3,7 +3,7 @@
 
 # MobileInsight Vagrant Installation Script
 # Copyright (c) 2020 MobileInsight Team
-# Author: Yuanjie Li, Zengwen Yuan
+# Author: Yuanjie Li, Zengwen Yuan, Yunqi Guo
 # Version: 2.0
 
 # --------------------------------MobileInsight---------------------------------------#
@@ -218,20 +218,27 @@ wget  http://www.mobileinsight.net/wireshark-3.4.0-rbc-dissector.tar.xz -O wires
 tar -xf wireshark-3.4.0.tar.xz
 rm wireshark-3.4.0.tar.xz
 
+# mkdir ws_1
+# mkdir ws_2
+# cp -r wireshark-3.4.0/ ws_1/
+# cp -r wireshark-3.4.0/ ws_2/
+
 wget http://www.tcpdump.org/release/libpcap-1.9.1.tar.gz
 tar -xf libpcap-1.9.1.tar.gz
 rm libpcap-1.9.1.tar.gz
 
 # Apply the patch to wireshark
-cp  /vagrant/wireshark-for-android/ws_android.patch ~/
-cd ~/wireshark-3.4.0
+# cd ws_1/
+cp /vagrant/wireshark-for-android/ws_android.patch ./
+cd wireshark-3.4.0
 patch -p1 < ../ws_android.patch
 
 # Compile wireshark first time
-cd ~/wireshark-3.4.0/tools/lemon
+cd tools/lemon
 cmake .
 make
 cp lemon ~/
+echo "lemon is generated"
 
 # Import the environment settings
 cd ~
@@ -316,74 +323,35 @@ SCRIPT
 
 
 $COMPILE_WIRESHARK = <<SCRIPT
-source ~/envsetup.sh
+# source ~/envsetup.sh
+#
+# # Create a new wireshark folder
+# # sudo rm -rf wireshark-3.4.0/
+#
+# # mkdir ws_env/
+# # cd ws_env/
+# # wget  http://www.mobileinsight.net/wireshark-3.4.0-rbc-dissector.tar.xz -O wireshark-3.4.0.tar.xz
+# # tar -xf wireshark-3.4.0.tar.xz
+# # rm wireshark-3.4.0.tar.xz
+# #
+# # # Apply the patch to wireshark
+# # cp  /vagrant/wireshark-for-android/ws_android.patch ./
+# # cd  wireshark-3.4.0
+# # patch -p1 < ../ws_android.patch
+#
+# echo "Compiling wireshark for Android"
+# cd  ~/wireshark-3.4.0
+# cmake -DCMAKE_PREFIX_PATH=${PREFIX} -DCMAKE_TOOLCHAIN_FILE=$NDK/build/cmake/android.toolchain.cmake -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=26 -DCMAKE_LIBRARY_PATH=${PREFIX} -DGLIB2_LIBRARY=${PREFIX}/lib/libglib-2.0.so -DGLIB2_MAIN_INCLUDE_DIR=${PREFIX}/include/glib-2.0 -DGLIB2_INTERNAL_INCLUDE_DIR=${PREFIX}/lib/glib-2.0/include -DGMODULE2_LIBRARY=${PREFIX}/lib/libgmodule-2.0.so -DGMODULE2_INCLUDE_DIR=${PREFIX}/include/glib-2.0 -DGTHREAD2_LIBRARY=${PREFIX}/lib/libgthread-2.0.so -DGTHREAD2_INCLUDE_DIR=${PREFIX}/include/glib-2.0 -DGCRYPT_LIBRARY=${PREFIX}/lib/libgcrypt.a -DGCRYPT_INCLUDE_DIR=${PREFIX}/include -DGCRYPT_ERROR_LIBRARY=${PREFIX}/lib/libgpg-error.a -DCARES_LIBRARY=${PREFIX}/lib/libcares.a -DCARES_INCLUDE_DIR=${PREFIX}/include -DCMAKE_TOOLCHAIN_FILE=$NDK/build/cmake/android.toolchain.cmake -DANDROID_ABI=armeabi-v7a -DANDROID_NATIVE_API_LEVEL=26 -DENABLE_gnutls=OFF -DENABLE_plugins=OFF -DENABLE_pcap=OFF -DENABLE_libgcrypt-prefix=OFF -DBUILD_wireshark=OFF -DBUILD_packet-editor=OFF -DBUILD_profile-build=OFF -DBUILD_tshark=OFF -DBUILD_editcap=OFF -DBUILD_capinfos=OFF -DBUILD_captype=OFF -DBUILD_mergecap=OFF -DBUILD_reordercap=OFF -DBUILD_text2pcap=OFF -DBUILD_dftest=OFF -DBUILD_randpkt=OFF -DBUILD_dumpcap=OFF -DBUILD_rawshark=OFF -DBUILD_sharkd=OFF -DBUILD_tfshark=OFF -DBUILD_pcap-ng-default=OFF -DBUILD_androiddump=OFF -DBUILD_sshdump=OFF -DBUILD_ciscodump=OFF -DBUILD_randpktdump=OFF -DBUILD_udpdump=OFF .
+# # To install the libwireshark at the same location as the other libs:
+# # Replace lemon with the prebuilt one
+#
+# grep -rwl '&& lemon' * | xargs -i@ sed -i 's/\&\& lemon/\&\& ~\/lemon/g' @
+# make
+# sudo make install
 
-# Create a new wireshark folder
-sudo rm -rf wireshark-3.4.0/
-
-ws_ver=3.4.0
-wget  http://www.mobileinsight.net/wireshark-3.4.0-rbc-dissector.tar.xz -O wireshark-3.4.0.tar.xz
-tar -xf wireshark-3.4.0.tar.xz
-rm wireshark-3.4.0.tar.xz
-
-# Apply the patch to wireshark
-cp  /vagrant/wireshark-for-android/ws_android.patch ~/
-cd ~/wireshark-3.4.0
-patch -p1 < ../ws_android.patch
-
-cmake \
-    -DCMAKE_PREFIX_PATH=${PREFIX} \
-    -DCMAKE_TOOLCHAIN_FILE=$NDK/build/cmake/android.toolchain.cmake \
-    -DANDROID_ABI=armeabi-v7a \
-    -DANDROID_NATIVE_API_LEVEL=26 \
-    -DCMAKE_LIBRARY_PATH=${PREFIX} \
-    -DGLIB2_LIBRARY=${PREFIX}/lib/libglib-2.0.so \
-    -DGLIB2_MAIN_INCLUDE_DIR=${PREFIX}/include/glib-2.0 \
-    -DGLIB2_INTERNAL_INCLUDE_DIR=${PREFIX}/lib/glib-2.0/include \
-    -DGMODULE2_LIBRARY=${PREFIX}/lib/libgmodule-2.0.so \
-    -DGMODULE2_INCLUDE_DIR=${PREFIX}/include/glib-2.0 \
-    -DGTHREAD2_LIBRARY=${PREFIX}/lib/libgthread-2.0.so \
-    -DGTHREAD2_INCLUDE_DIR=${PREFIX}/include/glib-2.0 \
-    -DGCRYPT_LIBRARY=${PREFIX}/lib/libgcrypt.a \
-    -DGCRYPT_INCLUDE_DIR=${PREFIX}/include \
-    -DGCRYPT_ERROR_LIBRARY=${PREFIX}/lib/libgpg-error.a \
-    -DCARES_LIBRARY=${PREFIX}/lib/libcares.a \
-    -DCARES_INCLUDE_DIR=${PREFIX}/include \
-    -DCMAKE_TOOLCHAIN_FILE=$NDK/build/cmake/android.toolchain.cmake \
-    -DANDROID_ABI=armeabi-v7a \
-    -DANDROID_NATIVE_API_LEVEL=26 \
-    -DENABLE_gnutls=OFF \
-    -DENABLE_plugins=OFF \
-    -DENABLE_pcap=OFF \
-    -DENABLE_libgcrypt-prefix=OFF \
-    -DBUILD_wireshark=OFF \
-    -DBUILD_packet-editor=OFF \
-    -DBUILD_profile-build=OFF \
-    -DBUILD_tshark=OFF \
-    -DBUILD_editcap=OFF \
-    -DBUILD_capinfos=OFF \
-    -DBUILD_captype=OFF \
-    -DBUILD_mergecap=OFF \
-    -DBUILD_reordercap=OFF \
-    -DBUILD_text2pcap=OFF \
-    -DBUILD_dftest=OFF \
-    -DBUILD_randpkt=OFF \
-    -DBUILD_dumpcap=OFF \
-    -DBUILD_rawshark=OFF \
-    -DBUILD_sharkd=OFF \
-    -DBUILD_tfshark=OFF \
-    -DBUILD_pcap-ng-default=OFF \
-    -DBUILD_androiddump=OFF \
-    -DBUILD_sshdump=OFF \
-    -DBUILD_ciscodump=OFF \
-    -DBUILD_randpktdump=OFF \
-    -DBUILD_udpdump=OFF .
-
-# To install the libwireshark at the same location as the other libs:
-# Replace lemon with the prebuilt one
-grep -rwl '&& lemon' * | xargs -i@ sed -i 's/\&\& lemon/\&\& ~\/lemon/g' @
-make
-sudo make install
+cp /vagrant/build_ws.sh ./
+chmod +x build_ws.sh
+./build_ws.sh
 
 SCRIPT
 

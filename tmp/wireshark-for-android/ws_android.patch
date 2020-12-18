@@ -1,0 +1,26 @@
+diff --git a/tools/lemon/CMakeLists.txt b/tools/lemon/CMakeLists.txt
+index af62d45..2f44a91 100644
+--- a/tools/lemon/CMakeLists.txt
++++ b/tools/lemon/CMakeLists.txt
+@@ -7,6 +7,8 @@
+ # SPDX-License-Identifier: GPL-2.0-or-later
+ #
+ 
++include(CheckCCompilerFlag)
++
+ add_executable(lemon lemon.c)
+ 
+ # To keep lemon.c as close to upstream as possible, deliberately ignore
+diff --git a/wsutil/ws_pipe.c b/wsutil/ws_pipe.c
+index 0a7d26f..3076cc0 100644
+--- a/wsutil/ws_pipe.c
++++ b/wsutil/ws_pipe.c
+@@ -108,7 +108,7 @@ close_non_standard_fds_linux(gpointer user_data _U_)
+         close(dir_fd);
+     } else {
+         /* Slow fallback in case /proc is not mounted */
+-        for (int fd = STDERR_FILENO + 1; fd < getdtablesize(); fd++) {
++        for (int fd = STDERR_FILENO + 1; fd < sysconf(_SC_OPEN_MAX); fd++) {
+             fcntl(fd, F_SETFD, FD_CLOEXEC);
+         }
+     }
