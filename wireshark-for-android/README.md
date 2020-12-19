@@ -1,8 +1,4 @@
 # Cross-compile Wireshark for Android
-
-Source: https://github.com/luckiday/wireshark-for-android
-
-
 This folder provides the vagrant environment to cross-compile 
 wireshark(3.4.0) for Android automatically. 
 
@@ -12,7 +8,7 @@ Run vagrant up and install the virtual image.
 
 ```bash
 cd /path/to/dev
-vagrant up
+vagrant up ws
 ```
 
 It will run and compile the wireshark and related libraries.
@@ -25,7 +21,7 @@ and `android_ws_dissector_pie`.
 You can stop the virtual machine with either command:
 
 ```bash
-vagrant suspend (suspends the machine)
-vagrant halt (stops the vagrant machine)
+vagrant suspend ws (suspends the machine)
+vagrant halt ws (stops the vagrant machine)
 ```
 
